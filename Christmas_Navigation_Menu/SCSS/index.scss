@@ -1,0 +1,99 @@
+/**
+ * Made by Yurets in UA!
+ * Copyright (c) GPL License <2021-2022> <Yurii Andriiko>
+ * http://yurets.info/
+ * Telegram @Yurets7777 E-mail: yuretshome@gmail.com
+ * "Роби добре, та тільки добре! А можеш? - Роби краще!"
+ */
+
+@import "./_reset.scss";
+@import "./_variables.scss";
+@import "./mixins.scss";
+
+body {
+    @include flex-r-c-c;
+    min-height: 100vh;
+    background: $bg-color;
+}
+
+.menu {
+    position: relative;
+    width: $menu-size;
+    height: $menu-size;
+    @include flex-r-c-c;
+
+    & > .toggle {
+        position: absolute;
+        width: $toggle-size;
+        height: $toggle-size;
+        background: $toggle-bg-clr;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    & > .toggle.active {
+        transform: rotate(315deg);
+        box-shadow: 0 0 0 $toggle-shadow-size $toggle-bg-clr;
+        background: $bg-color;
+    }
+
+    & > .toggle > span:first-child,
+    & > .toggle > span:last-child {
+        width: $add-pseudo-tbn-size;
+        background: $bg-color;
+        height: 2px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 1;
+    }
+
+    & > .toggle > span:first-child {
+        transform: translate(-50%, -50%);
+        transition: 0.5s;
+    }
+
+    & > .toggle > span:last-child {
+        transform: translate(-50%, -50%) rotate(90deg);
+        transition: 0.5s;
+    }
+
+    & > .toggle.active > span:first-child,
+    & > .toggle.active > span:last-child {
+        background: $toggle-bg-clr;
+    }
+
+    & > li {
+        position: absolute;
+        left: 10px;
+        transform: rotate(calc(360deg / $menu-items-count * var(--i))) translateX(45px);
+        transform-origin: 140px;
+        border-radius: 50%;
+        visibility: hidden;
+        opacity: 0;
+        transition: 0.5s;
+        z-index: 2;
+    }
+
+    & > li > a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: $icon-size;
+        width: $icon-container-size;
+        height: $icon-container-size;
+        transform: rotate(calc(360deg / -#{$menu-items-count} * var(--i)));
+    }
+
+    &.active > li {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    &.active > li.active {
+        border: 5px solid $bg-color;
+        background: $icon-container-bg-clr;
+        border-radius: 50%;
+        transform: rotate(calc(360deg / #{$menu-items-count} * var(--i))) translateX(12px);
+    }
+}
