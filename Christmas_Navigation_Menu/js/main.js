@@ -36,7 +36,7 @@ const handleActiveMenuItem = (options) => {
     const userClick = e.target.parentNode;
     const menuItemsArray = Array.from(menuItems);
 
-    if (userClick !== -1) {
+    if (menuItemsArray.indexOf(userClick) !== -1) {
         for (let i = 0; i < menuItemsArray.length; i++) {
             const menuItem = menuItemsArray[i];
             menuItem.classList.contains("active") &&
